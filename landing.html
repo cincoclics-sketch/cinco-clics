@@ -447,6 +447,7 @@
     color:var(--color-ink);
   }
   .price-tag span{ font-size:0.9rem; color:var(--color-muted); font-weight:400; }
+  .price-old{ text-decoration:line-through; color:var(--color-muted); font-size:1.1rem; font-weight:500; margin-right:8px; }
   .price-plan-name{ font-family:var(--font-body); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-accent); }
   .feature-mini{ font-size:0.88rem; padding:8px 0; border-bottom:1px solid var(--color-line); color:var(--color-ink-soft); }
   .price-card.featured .feature-mini{ border-color:#34344a; }
@@ -666,7 +667,7 @@
     </div>
     <div class="showcase-grid reveal">
       <figure class="showcase-card showcase-card--tall">
-        <img loading="lazy" src="assets/showcase-emprendedor-huerta.jpg" alt="Emprendedora armando pedidos en su taller">
+        <img loading="lazy" src="assets/showcase-emprendedor-mockup2.jpg" alt="Panel de administración de Cinco Clics mostrado en laptop y celular">
       </figure>
       <figure class="showcase-card">
         <img loading="lazy" src="assets/showcase-emprendedor-mockup.jpg" alt="Página de Cinco Clics mostrada en laptop y celular">
@@ -889,7 +890,8 @@
     <div class="pricing-grid reveal">
       <div class="price-card">
         <div class="price-plan-name">Arranque</div>
-        <div class="price-tag">$XX.000 <span>único pago</span></div>
+        <div class="price-tag"><span class="price-old">$100.000</span>$80.000 <span>único pago</span></div>
+        <div class="badge-pop">20% OFF solo por hoy</div>
         <p style="font-size:0.9rem;">Para empezar a existir en internet, ya.</p>
         <div class="feature-mini">1 página con toda tu info clave</div>
         <div class="feature-mini">Botón de WhatsApp</div>
@@ -898,24 +900,24 @@
       </div>
       <div class="price-card featured">
         <div class="badge-pop">Más elegido</div>
-        <div class="price-plan-name">Emprendedor</div>
-        <div class="price-tag">$XX.000 <span>único pago</span></div>
+        <div class="price-plan-name">Impulso</div>
+        <div class="price-tag">$149.999 <span>único pago</span></div>
         <p style="font-size:0.9rem;">Para vender y comunicarte mejor con tus clientes.</p>
-        <div class="feature-mini">Hasta 5 secciones</div>
+        <div class="feature-mini">Hasta 5 secciones personalizables</div>
+        <div class="feature-mini">Sección de blog o novedades</div>
         <div class="feature-mini">Formulario de contacto</div>
         <div class="feature-mini">Redes sociales integradas</div>
-        <div class="feature-mini">Optimizada para Google</div>
-        <a href="#contacto" class="btn btn--primary btn--block">Elegir Emprendedor</a>
+        <a href="#contacto" class="btn btn--primary btn--block">Elegir Impulso</a>
       </div>
       <div class="price-card">
-        <div class="price-plan-name">Negocio</div>
-        <div class="price-tag">$XX.000 <span>único pago</span></div>
+        <div class="price-plan-name">Emprendedor</div>
+        <div class="price-tag">$399.999 <span>único pago</span></div>
         <p style="font-size:0.9rem;">Para el que ya piensa en vender online.</p>
-        <div class="feature-mini">Todo lo del plan Emprendedor</div>
-        <div class="feature-mini">Catálogo o tienda básica</div>
-        <div class="feature-mini">Blog o novedades</div>
+        <div class="feature-mini">Todo lo del plan Impulso</div>
+        <div class="feature-mini">Carrito de compras / tienda online</div>
+        <div class="feature-mini">Funciones a medida de tu negocio</div>
         <div class="feature-mini">Soporte prioritario</div>
-        <a href="#contacto" class="btn btn--ghost btn--block">Elegir Negocio</a>
+        <a href="#contacto" class="btn btn--ghost btn--block">Elegir Emprendedor</a>
       </div>
     </div>
     <p class="pricing-note">*Precios de ejemplo para esta demo — se actualizan según moneda, plan comercial y región.</p>
