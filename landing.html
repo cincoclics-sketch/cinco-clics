@@ -147,13 +147,9 @@
     display:flex; align-items:center; justify-content:space-between;
     padding-top:16px; padding-bottom:16px;
   }
-  .logo{
-    display:flex; align-items:center;
-    color:var(--color-ink); /* "cinco" hereda este color vía currentColor */
-  }
-  .logo svg{ height:22px; width:auto; display:block; }
-  .logo--footer{ color:#fff; }
-  .logo--footer svg{ height:24px; }
+  .logo{ display:flex; align-items:center; }
+  .logo img{ height:34px; width:auto; display:block; }
+  .logo--footer img{ height:38px; }
   nav.links{ display:flex; gap:32px; }
   nav.links a{ font-size:0.92rem; font-weight:500; color:var(--color-ink-soft); }
   nav.links a:hover{ color:var(--color-ink); }
@@ -566,17 +562,7 @@
 <header class="site">
   <div class="wrap nav">
     <div class="logo" aria-label="Cinco Clics">
-      <svg viewBox="0 0 224 40" xmlns="http://www.w3.org/2000/svg" role="img">
-        <text x="0" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="currentColor">cinco</text>
-        <circle cx="46" cy="4.5" r="3" fill="var(--color-fresh)"/>
-        <text x="88" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="var(--color-accent)">clics</text>
-        <g transform="translate(180,2)">
-          <path d="M2 3 L5 21 L8 15 L14 21 L16.5 18.5 L10.5 12.5 L17 9 Z" fill="var(--color-accent)"/>
-          <line x1="19" y1="1" x2="21.5" y2="-2.5" stroke="var(--color-energy)" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="23" y1="6" x2="27" y2="4.5" stroke="var(--color-fresh)" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="22.5" y1="11.5" x2="26.5" y2="12.5" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round"/>
-        </g>
-      </svg>
+      <img src="assets/logo-mark.png" alt="Cinco Clics" loading="eager">
     </div>
     <nav class="links">
       <a href="#dolores">Por qué</a>
@@ -1015,17 +1001,7 @@
     <div class="footer-top">
       <div>
         <div class="logo logo--footer" style="margin-bottom:14px;" aria-label="Cinco Clics">
-          <svg viewBox="0 0 224 40" xmlns="http://www.w3.org/2000/svg" role="img">
-            <text x="0" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="currentColor">cinco</text>
-            <circle cx="46" cy="4.5" r="3" fill="var(--color-fresh)"/>
-            <text x="88" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="var(--color-accent)">clics</text>
-            <g transform="translate(180,2)">
-              <path d="M2 3 L5 21 L8 15 L14 21 L16.5 18.5 L10.5 12.5 L17 9 Z" fill="var(--color-accent)"/>
-              <line x1="19" y1="1" x2="21.5" y2="-2.5" stroke="var(--color-energy)" stroke-width="1.8" stroke-linecap="round"/>
-              <line x1="23" y1="6" x2="27" y2="4.5" stroke="var(--color-fresh)" stroke-width="1.8" stroke-linecap="round"/>
-              <line x1="22.5" y1="11.5" x2="26.5" y2="12.5" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round"/>
-            </g>
-          </svg>
+          <img src="assets/logo-mark-white.png" alt="Cinco Clics" loading="lazy">
         </div>
         <p style="max-width:32ch; font-size:0.88rem;">Transformamos ideas en presencia digital: una página de ventas profesional en cinco clics.</p>
       </div>
