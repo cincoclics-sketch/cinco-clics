@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinco Clics — Tu página de ventas en cinco clics</title>
+<meta name="description" content="Cinco Clics: obtené tu página de ventas en cinco clics. Diseño web rápido, simple y accesible para emprendedores, profesionales y pequeños comercios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     TOKENS DE MARCA — CINCO CLICS
+     Fuente: Manual de Marca · Cinco Clics
+     ============================================================ */
+  :root{
+    --color-ink: #1f1f2a;         /* azul oscuro de marca — texto principal / fondo oscuro */
+    --color-ink-soft: #4a4a58;
+    --color-paper: #ffffff;       /* blanco de marca — fondo claro */
+    --color-paper-dim: #f2f1fa;
+    --color-line: #e3e1f0;
+    --color-muted: #6f6d80;
+
+    --color-accent: #6c3bff;      /* violeta eléctrico — creatividad e innovación */
+    --color-accent-ink: #ffffff;  /* texto sobre el acento */
+    --color-accent-soft: #ece3ff; /* tint claro del violeta */
+    --color-accent-dark: #5527d9;
+
+    --color-trust: #2563eb;       /* azul intenso — confianza y profesionalismo */
+    --color-fresh: #38d9ff;       /* celeste digital — frescura y conexión */
+    --color-energy: #ffd84d;      /* amarillo acento — energía y acción (usar con moderación) */
+
+    --font-display: 'Poppins', 'Arial Black', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace; /* uso reservado: solo barra de URL simulada */
+
+    --dot-pattern: radial-gradient(var(--color-accent) 1.4px, transparent 1.4px);
+
+    --radius-s: 6px;
+    --radius-m: 14px;
+    --radius-l: 28px;
+
+    --maxw: 1180px;
+    --pad: clamp(20px, 5vw, 64px);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    font-family:var(--font-body);
+    color:var(--color-ink);
+    background:var(--color-paper);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding-left:var(--pad);
+    padding-right:var(--pad);
+  }
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--color-accent);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:16px; height:1px;
+    background:var(--color-accent);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:700;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  h2{ font-size:clamp(1.7rem, 3.4vw, 2.6rem); }
+  h3{ font-size:1.15rem; font-weight:600; }
+  p{ color:var(--color-ink-soft); }
+
+  .section{ padding:88px 0; }
+  .section--tight{ padding:56px 0; }
+  .section--dark{ background:var(--color-ink); color:var(--color-paper); }
+  .section--dark p{ color:#c7c6da; }
+  .section--soft{ background:var(--color-paper-dim); }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 26px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:0.95rem;
+    border:1.5px solid transparent;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{ outline:3px solid var(--color-accent); outline-offset:2px; }
+  .btn--primary{
+    background:var(--color-accent);
+    color:var(--color-accent-ink);
+  }
+  .btn--primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(61,90,254,0.55); }
+  .btn--ghost{
+    background:transparent;
+    border-color:var(--color-line);
+    color:var(--color-ink);
+  }
+  .btn--ghost:hover{ border-color:var(--color-ink); }
+  .btn--on-dark{ border-color:#38394d; color:var(--color-paper); }
+  .btn--on-dark:hover{ border-color:var(--color-paper); }
+  .btn--block{ width:100%; }
+  .btn--sm{ padding:10px 18px; font-size:0.85rem; }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,249,246,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--color-line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .logo{
+    display:flex; align-items:center;
+    color:var(--color-ink); /* "cinco" hereda este color vía currentColor */
+  }
+  .logo svg{ height:22px; width:auto; display:block; }
+  .logo--footer{ color:#fff; }
+  .logo--footer svg{ height:24px; }
+  nav.links{ display:flex; gap:32px; }
+  nav.links a{ font-size:0.92rem; font-weight:500; color:var(--color-ink-soft); }
+  nav.links a:hover{ color:var(--color-ink); }
+  .nav-cta{ display:flex; align-items:center; gap:18px; }
+  .nav-toggle{
+    display:none;
+    background:none; border:1px solid var(--color-line); border-radius:8px;
+    width:40px; height:40px; align-items:center; justify-content:center;
+  }
+  @media (max-width:880px){
+    nav.links{ display:none; }
+    .nav-toggle{ display:flex; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:72px 0 40px; position:relative; overflow:hidden; }
+  .hero::before{
+    content:'';
+    position:absolute; top:-10px; left:-10px;
+    width:130px; height:110px;
+    background-image:var(--dot-pattern);
+    background-size:16px 16px;
+    opacity:0.35;
+    pointer-events:none;
+  }
+  @media (max-width:640px){ .hero::before{ display:none; } }
+  .hero .wrap{ position:relative; z-index:1; }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero h1{ font-size:clamp(2.1rem, 5vw, 3.4rem); margin-bottom:20px; }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+    text-decoration-color: var(--color-accent-soft);
+  }
+  .hero p.lead{ font-size:1.08rem; max-width:46ch; margin-bottom:32px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px; }
+  .trust-line{
+    display:flex; align-items:center; gap:10px;
+    font-size:0.82rem; color:var(--color-muted);
+    padding-top:20px; border-top:1px solid var(--color-line);
+    max-width:44ch;
+  }
+  .trust-line .dot{ width:6px; height:6px; border-radius:50%; background:var(--color-accent); flex-shrink:0; }
+
+  /* Browser mockup — signature element */
+  .browser{
+    background:#fff;
+    border-radius:var(--radius-m);
+    border:1px solid var(--color-line);
+    box-shadow:0 30px 60px -20px rgba(17,17,16,0.18);
+    overflow:hidden;
+  }
+  .browser-bar{
+    display:flex; align-items:center; gap:10px;
+    padding:12px 14px;
+    background:var(--color-paper-dim);
+    border-bottom:1px solid var(--color-line);
+  }
+  .browser-dots{ display:flex; gap:6px; }
+  .browser-dots span{ width:9px; height:9px; border-radius:50%; background:#d7d5e8; }
+  .browser-url{
+    flex:1;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    background:#fff;
+    border:1px solid var(--color-line);
+    border-radius:100px;
+    padding:6px 14px;
+    color:var(--color-ink-soft);
+    display:flex; align-items:center;
+  }
+  .browser-url .caret{
+    display:inline-block; width:1px; height:13px; background:var(--color-accent);
+    margin-left:2px; animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .browser-body{ padding:22px; background:#fff; }
+  .mock-nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; }
+  .mock-logo{
+    font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.08em;
+    border:1.5px dashed var(--color-line); border-radius:6px;
+    padding:5px 10px; color:var(--color-muted);
+  }
+  .mock-pill{ width:70px; height:8px; border-radius:100px; background:var(--color-paper-dim); }
+  .mock-hero{
+    background:linear-gradient(135deg, var(--color-accent-soft), #fff 70%);
+    border-top:2px solid var(--color-fresh);
+    border-radius:var(--radius-s);
+    padding:26px 20px;
+    margin-bottom:16px;
+  }
+  .mock-hero .mock-h{ width:70%; height:16px; border-radius:4px; background:var(--color-ink); opacity:0.85; margin-bottom:10px; }
+  .mock-hero .mock-h2{ width:45%; height:16px; border-radius:4px; background:var(--color-ink); opacity:0.85; margin-bottom:14px; }
+  .mock-hero .mock-line{ width:85%; height:8px; border-radius:4px; background:#d7d5e8; margin-bottom:8px; }
+  .mock-hero .mock-line.short{ width:55%; }
+  .mock-hero--photo{
+    background-size:cover; background-position:center; min-height:150px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .mock-hero--photo .mock-h{ opacity:1; }
+  .mock-btn{
+    display:inline-block; margin-top:12px;
+    background:var(--color-accent); color:#fff;
+    font-family:var(--font-mono); font-size:0.68rem;
+    padding:8px 16px; border-radius:100px;
+  }
+  .mock-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .mock-card{ background:var(--color-paper-dim); border-radius:8px; padding:8px; overflow:hidden; }
+  .mock-card .mock-pill{ width:60%; margin-bottom:8px; }
+  .mock-card .mock-line{ width:100%; height:6px; border-radius:4px; background:#e4e2f2; margin-bottom:5px; }
+  .mock-thumb{
+    width:100%; height:58px; object-fit:cover; border-radius:6px;
+    display:block; margin-bottom:8px; background:var(--color-line);
+  }
+
+  /* ---------- STATS STRIP ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background:var(--color-line);
+    border-top:1px solid var(--color-line);
+    border-bottom:1px solid var(--color-line);
+  }
+  @media (max-width:760px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+  .stat{ background:var(--color-paper); padding:32px var(--pad); text-align:center; }
+  .stat .num{ font-family:var(--font-display); font-size:2.1rem; color:var(--color-trust); }
+  .stat .label{ font-size:0.82rem; color:var(--color-muted); margin-top:4px; }
+  .stats-note{ text-align:center; font-size:0.72rem; color:var(--color-muted); padding-top:14px; font-style:italic; }
+
+  /* Vidriera / showcase de productos reales */
+  .showcase-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:16px;
+    height:440px;
+  }
+  .showcase-card{
+    position:relative; border-radius:var(--radius-m); overflow:hidden;
+    background:var(--color-paper-dim);
+  }
+  .showcase-card--tall{ grid-row:1 / 3; }
+  .showcase-card img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .showcase-card::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(31,31,42,0.75) 0%, rgba(31,31,42,0) 45%);
+    pointer-events:none;
+  }
+  .showcase-card figcaption{
+    position:absolute; left:16px; bottom:14px; z-index:1;
+  }
+  .showcase-tag{
+    display:inline-block; background:rgba(255,255,255,0.92); color:var(--color-ink);
+    font-size:0.78rem; font-weight:600; padding:6px 12px; border-radius:100px;
+  }
+  .showcase-note{ text-align:center; font-size:0.78rem; color:var(--color-muted); margin-top:18px; font-style:italic; }
+
+  /* Portfolio: mockups de celular con video real */
+  .portfolio-grid{
+    display:flex; justify-content:center; align-items:flex-start;
+    gap:56px; flex-wrap:wrap; padding-top:8px;
+  }
+  .phone-frame{
+    width:220px; background:var(--color-ink); border-radius:34px;
+    padding:10px 10px 14px; box-shadow:0 30px 60px -24px rgba(31,31,42,0.4);
+    position:relative;
+  }
+  .phone-frame::before{
+    content:''; position:absolute; top:22px; left:50%; transform:translateX(-50%);
+    width:56px; height:5px; border-radius:100px; background:#38394d; z-index:2;
+  }
+  .phone-screen{
+    position:relative; border-radius:22px; overflow:hidden;
+    aspect-ratio:384 / 848; background:var(--color-paper-dim);
+  }
+  .phone-screen video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .phone-caption{ text-align:center; margin-top:18px; }
+  .phone-caption .biz{ font-weight:700; font-size:0.98rem; display:block; margin-bottom:2px; }
+  .phone-caption .tag{ font-size:0.84rem; color:var(--color-muted); display:block; margin-bottom:8px; }
+  .phone-caption a{ font-size:0.82rem; color:var(--color-accent); font-weight:600; }
+  .phone-caption a:hover{ text-decoration:underline; }
+  @media (max-width:560px){ .phone-frame{ width:180px; } }
+  @media (max-width:760px){
+    .showcase-grid{ grid-template-columns:1fr; grid-template-rows:none; height:auto; }
+    .showcase-card{ height:220px; }
+    .showcase-card--tall{ grid-row:auto; height:280px; }
+  }
+
+  /* ---------- GRID SECTIONS ---------- */
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head p{ font-size:1.02rem; }
+
+  .cards-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  @media (max-width:960px){ .cards-4{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .cards-4{ grid-template-columns:1fr; } }
+
+  .pain-card{
+    background:#fff; border:1px solid var(--color-line); border-radius:var(--radius-m);
+    padding:26px 22px;
+  }
+  .pain-card .icon{
+    width:42px; height:42px; border-radius:10px;
+    background:var(--color-accent-soft); color:var(--color-accent);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .pain-card h3{ margin-bottom:8px; }
+  .pain-card p{ font-size:0.92rem; }
+
+  /* Solution */
+  .solution-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  @media (max-width:900px){ .solution-grid{ grid-template-columns:1fr; } }
+  .feature-list li{
+    display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--color-line);
+  }
+  .feature-list li:last-child{ border-bottom:none; }
+  .feature-list .check{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--color-ink); color:var(--color-paper);
+    display:flex; align-items:center; justify-content:center; font-size:0.75rem;
+  }
+  .feature-list strong{ display:block; margin-bottom:2px; }
+  .feature-list span{ font-size:0.9rem; color:var(--color-muted); }
+
+  .device-frame{
+    background:var(--color-ink); border-radius:var(--radius-l); padding:26px;
+  }
+  .device-frame .browser{ box-shadow:none; }
+
+  /* Process */
+  .process-list{ display:flex; flex-direction:column; }
+  .process-item{
+    display:grid; grid-template-columns:110px 1fr; gap:24px;
+    padding:26px 0; border-bottom:1px solid var(--color-line);
+  }
+  @media (max-width:560px){ .process-item{ grid-template-columns:1fr; gap:6px; } }
+  .process-item:first-child{ border-top:1px solid var(--color-line); }
+  .process-num{
+    font-family:var(--font-body); font-size:1.2rem; color:var(--color-accent); font-weight:600;
+    text-transform:uppercase; letter-spacing:0.02em;
+  }
+  .process-item h3{ margin-bottom:6px; }
+  .process-item p{ max-width:52ch; }
+
+  /* Methodology / credibility */
+  .method-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  @media (max-width:900px){ .method-grid{ grid-template-columns:1fr; } }
+  .chip-cloud{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-family:var(--font-body); font-size:0.78rem; font-weight:600;
+    border:1px solid #38394d; color:#dcdbec;
+    padding:8px 14px; border-radius:100px;
+  }
+  .why-list{ display:flex; flex-direction:column; gap:14px; }
+  .why-list li{
+    display:flex; align-items:flex-start; gap:12px;
+    font-size:0.96rem; color:#e4e3ee;
+  }
+  .why-check{
+    flex-shrink:0; width:22px; height:22px; border-radius:50%;
+    background:var(--color-fresh); color:var(--color-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.7rem; font-weight:700; margin-top:1px;
+  }
+  .method-badge{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--font-body); font-size:0.74rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;
+    color:#c7c6da; border:1px dashed #38394d; border-radius:100px;
+    padding:8px 16px; margin-bottom:20px;
+  }
+
+  /* Pricing */
+  .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:900px){ .pricing-grid{ grid-template-columns:1fr; } }
+  .price-card{
+    background:#fff; border:1px solid var(--color-line); border-radius:var(--radius-m);
+    padding:32px 26px; display:flex; flex-direction:column;
+  }
+  .price-card.featured{
+    background:var(--color-ink); color:var(--color-paper); border-color:var(--color-ink);
+    transform:translateY(-10px);
+  }
+  .price-card.featured p{ color:#c7c6da; }
+  .price-card.featured .price-tag{ color:#fff; }
+  .price-card.featured .feature-mini{ color:#dcdbec; }
+  .price-tag{
+    font-family:var(--font-body); font-weight:700; font-size:2rem; margin:14px 0 4px;
+    color:var(--color-ink);
+  }
+  .price-tag span{ font-size:0.9rem; color:var(--color-muted); font-weight:400; }
+  .price-plan-name{ font-family:var(--font-body); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-accent); }
+  .feature-mini{ font-size:0.88rem; padding:8px 0; border-bottom:1px solid var(--color-line); color:var(--color-ink-soft); }
+  .price-card.featured .feature-mini{ border-color:#34344a; }
+  .feature-mini:last-of-type{ border-bottom:none; }
+  .price-card .btn{ margin-top:24px; }
+  .badge-pop{
+    align-self:flex-start; background:var(--color-energy); color:var(--color-ink);
+    font-family:var(--font-body); font-size:0.68rem; font-weight:600; padding:4px 10px; border-radius:100px; margin-bottom:14px;
+  }
+  .pricing-note{ text-align:center; font-size:0.8rem; color:var(--color-muted); margin-top:28px; font-style:italic; }
+
+  /* Testimonials */
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:900px){ .testi-grid{ grid-template-columns:1fr; } }
+  .testi-card{
+    background:var(--color-paper-dim); border-radius:var(--radius-m); padding:26px;
+  }
+  .testi-card p.quote{ color:var(--color-ink); font-size:0.98rem; margin-bottom:18px; }
+  .testi-who{ display:flex; align-items:center; gap:12px; }
+  .avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--color-ink); color:var(--color-paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-body); font-size:0.75rem; font-weight:600;
+  }
+  .testi-who .name{ font-weight:600; font-size:0.9rem; }
+  .testi-who .biz{ font-size:0.8rem; color:var(--color-muted); }
+
+  /* Community */
+  .community-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  @media (max-width:900px){ .community-grid{ grid-template-columns:1fr; } }
+  .community-visual{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  }
+  .comm-card{
+    background:#fff; border:1px solid var(--color-line); border-radius:var(--radius-m);
+    padding:20px; text-align:center;
+  }
+  .comm-card .icon{ font-size:1.6rem; margin-bottom:10px; }
+  .comm-card .n{ font-family:var(--font-body); font-weight:600; font-size:1.1rem; }
+  .comm-card .l{ font-size:0.78rem; color:var(--color-muted); }
+
+  /* Contact form */
+  .contact-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:flex-start;
+  }
+  @media (max-width:900px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .form-card{
+    background:#fff; border:1px solid var(--color-line); border-radius:var(--radius-l);
+    padding:32px;
+  }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:0.82rem; font-weight:600; margin-bottom:6px; }
+  .field input, .field textarea{
+    width:100%; padding:12px 14px; border-radius:var(--radius-s);
+    border:1px solid var(--color-line); font-family:var(--font-body); font-size:0.94rem;
+    background:var(--color-paper);
+  }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--color-accent); border-color:transparent; }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .form-success{
+    display:none; background:var(--color-accent-soft); color:var(--color-accent-dark);
+    padding:14px 16px; border-radius:var(--radius-s); font-size:0.88rem; margin-bottom:16px;
+    font-weight:600;
+  }
+  .form-success.show{ display:block; }
+
+  /* Footer */
+  footer.site{ background:var(--color-ink); color:#c7c6da; padding:56px 0 28px; position:relative; overflow:hidden; }
+  footer.site::before{
+    content:'';
+    position:absolute; bottom:-20px; right:-20px;
+    width:150px; height:120px;
+    background-image:radial-gradient(var(--color-fresh) 1.4px, transparent 1.4px);
+    background-size:18px 18px;
+    opacity:0.3;
+    pointer-events:none;
+  }
+  @media (max-width:640px){ footer.site::before{ display:none; } }
+  footer.site .wrap{ position:relative; z-index:1; }
+  .footer-top{
+    display:flex; justify-content:space-between; gap:32px; flex-wrap:wrap;
+    padding-bottom:36px; border-bottom:1px solid #34334a;
+  }
+  .footer-cols{ display:flex; gap:64px; flex-wrap:wrap; }
+  .footer-col h4{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:#8b89a3; margin-bottom:14px; font-family:var(--font-body); }
+  .footer-col li{ margin-bottom:9px; font-size:0.9rem; }
+  .footer-col a:hover{ color:#fff; }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:22px;
+    font-size:0.78rem; color:#8b89a3; flex-wrap:wrap; gap:10px;
+  }
+  .proto-flag{
+    font-family:var(--font-mono); font-size:0.7rem; border:1px dashed #38394d; padding:4px 10px; border-radius:100px;
+  }
+
+  /* Reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* Mobile menu */
+  .mobile-menu{
+    display:none; flex-direction:column; gap:2px;
+    background:var(--color-paper); border-bottom:1px solid var(--color-line);
+    padding:10px var(--pad) 18px;
+  }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{ padding:12px 0; font-weight:500; border-bottom:1px solid var(--color-line); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="logo" aria-label="Cinco Clics">
+      <svg viewBox="0 0 224 40" xmlns="http://www.w3.org/2000/svg" role="img">
+        <text x="0" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="currentColor">cinco</text>
+        <circle cx="46" cy="4.5" r="3" fill="var(--color-fresh)"/>
+        <text x="88" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="var(--color-accent)">clics</text>
+        <g transform="translate(180,2)">
+          <path d="M2 3 L5 21 L8 15 L14 21 L16.5 18.5 L10.5 12.5 L17 9 Z" fill="var(--color-accent)"/>
+          <line x1="19" y1="1" x2="21.5" y2="-2.5" stroke="var(--color-energy)" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="23" y1="6" x2="27" y2="4.5" stroke="var(--color-fresh)" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="22.5" y1="11.5" x2="26.5" y2="12.5" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <nav class="links">
+      <a href="#dolores">Por qué</a>
+      <a href="#solucion">Servicio</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#precios">Precios</a>
+      <a href="#comunidad">Comunidad</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contacto" class="btn btn--primary btn--sm">Quiero mi web</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#dolores">Por qué</a>
+    <a href="#solucion">Servicio</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#precios">Precios</a>
+    <a href="#comunidad">Comunidad</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Digital, pero humana</div>
+      <h1>Obtené tu página<br>de ventas en <em>cinco clics</em>.</h1>
+      <p class="lead">Transformamos tu idea en presencia digital: diseño y herramientas simples, cercanas y accesibles para tener tu negocio online sin conocimientos técnicos.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn--primary">Quiero mi página web</a>
+        <a href="#proceso" class="btn btn--ghost">Ver cómo funciona</a>
+      </div>
+      <div class="trust-line">
+        <span class="dot"></span>
+        <span>Rápida · Simple · Profesional · Accesible</span>
+      </div>
+    </div>
+
+    <div class="browser reveal">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url"><span id="typedUrl"></span><span class="caret"></span></div>
+      </div>
+      <div class="browser-body">
+        <div class="mock-nav">
+          <div class="mock-logo">[TU LOGO]</div>
+          <div style="display:flex; gap:8px;">
+            <div class="mock-pill"></div>
+            <div class="mock-pill" style="width:40px;"></div>
+          </div>
+        </div>
+        <div class="mock-hero">
+          <div class="mock-h"></div>
+          <div class="mock-h2"></div>
+          <div class="mock-line"></div>
+          <div class="mock-line short"></div>
+          <span class="mock-btn">HABLAR POR WHATSAPP</span>
+        </div>
+        <div class="mock-cards">
+          <div class="mock-card">
+            <img class="mock-thumb" loading="lazy" src="assets/showcase-tomates.jpg" alt="Combo de semillas de tomates reliquia — Siembra Feliz">
+            <div class="mock-line" style="width:70%;"></div>
+          </div>
+          <div class="mock-card">
+            <img class="mock-thumb" loading="lazy" src="assets/showcase-verduras.jpg" alt="Verduras frescas de huerta — Siembra Feliz">
+            <div class="mock-line" style="width:70%;"></div>
+          </div>
+          <div class="mock-card">
+            <img class="mock-thumb" loading="lazy" src="assets/showcase-blute-lata.jpg" alt="Lata de kombucha Limón y Jengibre — BLÜTE Kombucha">
+            <div class="mock-line" style="width:70%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<div class="wrap">
+  <div class="stats reveal">
+    <div class="stat"><div class="num">5 días</div><div class="label">entrega promedio*</div></div>
+    <div class="stat"><div class="num">+120</div><div class="label">páginas entregadas*</div></div>
+    <div class="stat"><div class="num">98%</div><div class="label">clientes que recomiendan*</div></div>
+    <div class="stat"><div class="num">5</div><div class="label">clicks, de la idea al lanzamiento</div></div>
+  </div>
+  <div class="stats-note">*Cifras de ejemplo para esta demo — se reemplazan por datos reales del negocio.</div>
+</div>
+
+<!-- ============ VIDRIERA / IMPACTO VISUAL ============ -->
+<section class="section section--tight" id="vidriera">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Lo que tu producto merece</div>
+      <h2>Tu producto, protagonista</h2>
+      <p>Así de bien se ve un producto cuidado cuando tiene la vidriera digital correcta.</p>
+    </div>
+    <div class="showcase-grid reveal">
+      <figure class="showcase-card showcase-card--tall">
+        <img loading="lazy" src="assets/showcase-tomates.jpg" alt="Combo de semillas de tomates reliquia, huerta agroecológica — Siembra Feliz">
+        <figcaption><span class="showcase-tag">Huerta y semillas artesanales</span></figcaption>
+      </figure>
+      <figure class="showcase-card">
+        <img loading="lazy" src="assets/showcase-blute.jpg" alt="Brindis con kombucha BLÜTE en un entorno patagónico">
+        <figcaption><span class="showcase-tag">Bebidas fermentadas premium</span></figcaption>
+      </figure>
+      <figure class="showcase-card">
+        <img loading="lazy" src="assets/showcase-flores.jpg" alt="Semillas de flores en su color real — Siembra Feliz">
+        <figcaption><span class="showcase-tag">Producción propia y color real</span></figcaption>
+      </figure>
+    </div>
+    <p class="showcase-note">Fotos de producto de Siembra Feliz y BLÜTE Kombucha, dos negocios reales que ya trabajaron con nosotros — más abajo mostramos cómo quedaron sus páginas.</p>
+  </div>
+</section>
+
+<!-- ============ DOLORES ============ -->
+<section class="section" id="dolores">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Lo que frena a tu negocio hoy</div>
+      <h2>Sabemos por qué todavía no vendés lo que deberías</h2>
+      <p>Cuatro problemas que se repiten en casi todos los emprendimientos que todavía no tienen presencia digital propia.</p>
+    </div>
+    <div class="cards-4 reveal">
+      <div class="pain-card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Visibilidad</h3>
+        <p>Tus clientes te buscan en Google y no te encuentran. La competencia sí aparece.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l7 3v5c0 5-3.5 7.5-7 8-3.5-0.5-7-3-7-8V5l7-3z" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <h3>Confianza</h3>
+        <p>Sin una web propia, cuesta demostrar que sos un negocio serio y establecido.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M13 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Ventas</h3>
+        <p>Vendés por WhatsApp y redes, pero se pierden pedidos y consultas en el camino.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="14" cy="8" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16c0-2.5 2-4 5-4s5 1.5 5 4M12 12.5c2.4 0.2 4 1.6 4 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Comunidad</h3>
+        <p>No tenés un espacio propio donde tu gente vuelva y se sienta parte de la marca.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUCIÓN ============ -->
+<section class="section section--soft" id="solucion">
+  <div class="wrap">
+    <div class="solution-grid">
+      <div class="reveal">
+        <div class="eyebrow">Nuestra solución</div>
+        <h2 style="margin-bottom:20px;">Una página web lista para vender, en tiempo récord</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="check">✓</span>
+            <div><strong>Diseño profesional a tu medida</strong><span>Adaptado a tu marca — o te ayudamos a construirla desde cero.</span></div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div><strong>Botón de WhatsApp directo</strong><span>Para que ningún cliente se pierda en el camino.</span></div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div><strong>Preparada para que te encuentren en Google</strong><span>Estructura pensada para aparecer en búsquedas locales.</span></div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div><strong>La administrás vos, sin depender de nadie</strong><span>Textos, fotos y precios: los cambiás cuando quieras.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="device-frame reveal">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url" style="justify-content:center;">tunegocio.com.ar</div>
+          </div>
+          <div class="browser-body">
+            <div class="mock-nav">
+              <div class="mock-logo">[TU LOGO]</div>
+              <div class="mock-pill" style="width:50px;"></div>
+            </div>
+            <div class="mock-hero mock-hero--photo" style="background-image:linear-gradient(0deg, rgba(31,31,42,0.55), rgba(31,31,42,0.15)), url('assets/showcase-blute.jpg');">
+              <div class="mock-h" style="width:55%; background:#fff;"></div>
+              <div class="mock-line" style="background:rgba(255,255,255,0.65);"></div>
+              <div class="mock-line short" style="background:rgba(255,255,255,0.65);"></div>
+              <span class="mock-btn">VER PRODUCTOS</span>
+            </div>
+            <div class="mock-cards">
+              <div class="mock-card">
+                <img class="mock-thumb" loading="lazy" src="assets/showcase-tomates.jpg" alt="Tomates reliquia — Siembra Feliz">
+                <div class="mock-line"></div>
+              </div>
+              <div class="mock-card">
+                <img class="mock-thumb" loading="lazy" src="assets/showcase-verduras.jpg" alt="Verduras de huerta — Siembra Feliz">
+                <div class="mock-line"></div>
+              </div>
+              <div class="mock-card">
+                <img class="mock-thumb" loading="lazy" src="assets/showcase-blute-lata.jpg" alt="Lata de kombucha BLÜTE">
+                <div class="mock-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section class="section" id="proceso">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Cómo trabajamos</div>
+      <h2>De la idea a tu web online, en cinco clicks</h2>
+    </div>
+    <div class="process-list reveal">
+      <div class="process-item">
+        <div class="process-num">Click 1</div>
+        <div><h3>Diseño</h3><p>Definimos colores, estilo y estructura según las necesidades de tu negocio.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">Click 2</div>
+        <div><h3>Desarrollo</h3><p>Creamos la estructura y funcionalidad de la página.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">Click 3</div>
+        <div><h3>Contenido</h3><p>Incorporamos textos, imágenes, productos y toda la información necesaria.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">Click 4</div>
+        <div><h3>Adaptación</h3><p>Optimizamos la página para celulares y otros dispositivos.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">Click 5</div>
+        <div><h3>Lanzamiento</h3><p>Publicamos la web para que tu negocio empiece a estar presente en Internet.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO / TRABAJOS REALES ============ -->
+<section class="section section--tight" id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Trabajos reales</div>
+      <h2>Así quedaron algunas páginas que ya hicimos</h2>
+      <p>Mirá cómo se navegan en el celular — así es como la mayoría de tus clientes va a entrar a la tuya.</p>
+    </div>
+    <div class="portfolio-grid reveal">
+      <figure>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <video src="assets/demo-siembra-feliz.mp4" poster="assets/demo-siembra-feliz-poster.jpg" autoplay muted loop playsinline></video>
+          </div>
+        </div>
+        <figcaption class="phone-caption">
+          <span class="biz">Siembra Feliz</span>
+          <span class="tag">Semillas y huertas urbanas</span>
+          <a href="https://www.siembrafeliz.com.ar/" target="_blank" rel="noopener">Ver sitio →</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <video src="assets/demo-blute-kombucha.mp4" poster="assets/demo-blute-kombucha-poster.jpg" autoplay muted loop playsinline></video>
+          </div>
+        </div>
+        <figcaption class="phone-caption">
+          <span class="biz">BLÜTE Kombucha</span>
+          <span class="tag">Bebidas fermentadas premium</span>
+          <a href="https://www.blutekombucha.com.ar/" target="_blank" rel="noopener">Ver sitio →</a>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METODOLOGÍA / CREDIBILIDAD ============ -->
+<section class="section section--dark">
+  <div class="wrap method-grid">
+    <div class="reveal">
+      <div class="method-badge">● Por qué elegirnos</div>
+      <h2 style="margin-bottom:18px;">Simplificamos un proceso que muchas veces parece complejo</h2>
+      <p style="max-width:52ch;">No necesitás saber programación ni encargarte de cuestiones técnicas: nosotros nos ocupamos de transformar tu idea en una experiencia digital. Una idea, cinco clicks, una nueva oportunidad para crecer.</p>
+    </div>
+    <div class="reveal">
+      <ul class="why-list">
+        <li><span class="why-check">✓</span> Porque somos rápidos.</li>
+        <li><span class="why-check">✓</span> Porque es simple y sin complicaciones.</li>
+        <li><span class="why-check">✓</span> Porque ofrecemos un precio accesible.</li>
+        <li><span class="why-check">✓</span> Porque el cliente no necesita saber programar ni ocuparse de lo técnico.</li>
+      </ul>
+      <div class="chip-cloud" style="margin-top:24px;">
+        <span class="chip">Moderna</span>
+        <span class="chip">Creativa</span>
+        <span class="chip">Cercana</span>
+        <span class="chip">Ágil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRECIOS ============ -->
+<section class="section" id="precios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Planes</div>
+      <h2>Un precio pensado para tu tipo de negocio</h2>
+      <p>Tres formatos según cuánto necesite crecer tu presencia digital hoy.</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-plan-name">Arranque</div>
+        <div class="price-tag">$XX.000 <span>único pago</span></div>
+        <p style="font-size:0.9rem;">Para empezar a existir en internet, ya.</p>
+        <div class="feature-mini">1 página con toda tu info clave</div>
+        <div class="feature-mini">Botón de WhatsApp</div>
+        <div class="feature-mini">Hosting incluido 1 año</div>
+        <a href="#contacto" class="btn btn--ghost btn--block">Elegir Arranque</a>
+      </div>
+      <div class="price-card featured">
+        <div class="badge-pop">Más elegido</div>
+        <div class="price-plan-name">Emprendedor</div>
+        <div class="price-tag">$XX.000 <span>único pago</span></div>
+        <p style="font-size:0.9rem;">Para vender y comunicarte mejor con tus clientes.</p>
+        <div class="feature-mini">Hasta 5 secciones</div>
+        <div class="feature-mini">Formulario de contacto</div>
+        <div class="feature-mini">Redes sociales integradas</div>
+        <div class="feature-mini">Optimizada para Google</div>
+        <a href="#contacto" class="btn btn--primary btn--block">Elegir Emprendedor</a>
+      </div>
+      <div class="price-card">
+        <div class="price-plan-name">Negocio</div>
+        <div class="price-tag">$XX.000 <span>único pago</span></div>
+        <p style="font-size:0.9rem;">Para el que ya piensa en vender online.</p>
+        <div class="feature-mini">Todo lo del plan Emprendedor</div>
+        <div class="feature-mini">Catálogo o tienda básica</div>
+        <div class="feature-mini">Blog o novedades</div>
+        <div class="feature-mini">Soporte prioritario</div>
+        <a href="#contacto" class="btn btn--ghost btn--block">Elegir Negocio</a>
+      </div>
+    </div>
+    <p class="pricing-note">*Precios de ejemplo para esta demo — se actualizan según moneda, plan comercial y región.</p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Lo que dicen (ejemplo)</div>
+      <h2>Emprendedores como vos, ya online</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <p class="quote">"Desde que tengo mi página, los clientes confían más antes de comprar. Se nota en las consultas por WhatsApp."</p>
+        <div class="testi-who"><div class="avatar">MG</div><div><div class="name">M. Gómez</div><div class="biz">Kiosco "La Esquina" — ejemplo</div></div></div>
+      </div>
+      <div class="testi-card">
+        <p class="quote">"En una semana ya tenía la web funcionando. Antes tardaba meses en decidirme por lo caro que parecía."</p>
+        <div class="testi-who"><div class="avatar">RS</div><div><div class="name">R. Sosa</div><div class="biz">Gomería Sosa — ejemplo</div></div></div>
+      </div>
+      <div class="testi-card">
+        <p class="quote">"Ahora mis clientes me encuentran solos buscando en Google. Antes dependía 100% del boca en boca."</p>
+        <div class="testi-who"><div class="avatar">CV</div><div><div class="name">C. Vega</div><div class="biz">Estudio de entrenamiento — ejemplo</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMUNIDAD ============ -->
+<section class="section" id="comunidad">
+  <div class="wrap community-grid">
+    <div class="reveal">
+      <div class="eyebrow">Más que una web</div>
+      <h2 style="margin-bottom:16px;">Sumate a una comunidad de emprendedores que se ayudan entre sí</h2>
+      <p style="max-width:48ch; margin-bottom:24px;">Además de tu página, formás parte de un grupo donde compartimos tips para crecer online y te conectamos con otros emprendedores de tu zona.</p>
+      <a href="#contacto" class="btn btn--primary">Unirme a la comunidad</a>
+    </div>
+    <div class="community-visual reveal">
+      <div class="comm-card"><div class="icon">💬</div><div class="n">Grupo activo</div><div class="l">de WhatsApp</div></div>
+      <div class="comm-card"><div class="icon">📌</div><div class="n">Tips mensuales</div><div class="l">para vender online</div></div>
+      <div class="comm-card"><div class="icon">🤝</div><div class="n">Networking</div><div class="l">entre emprendedores</div></div>
+      <div class="comm-card"><div class="icon">📈</div><div class="n">Seguimiento</div><div class="l">post-entrega</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section section--soft" id="contacto">
+  <div class="wrap contact-wrap">
+    <div class="reveal">
+      <div class="eyebrow">Empecemos</div>
+      <h2 style="margin-bottom:16px;">¿Listo para que tu negocio se vea tan grande como es?</h2>
+      <p style="max-width:44ch;">Contanos un poco de tu negocio y te respondemos con una propuesta a medida, sin compromiso.</p>
+    </div>
+    <div class="form-card reveal">
+      <div class="form-success" id="formSuccess">¡Listo! Recibimos tu consulta — te contactamos a la brevedad.</div>
+      <form id="contactForm">
+        <div class="field">
+          <label for="nombre">Tu nombre</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Ej: Marcos Gómez">
+        </div>
+        <div class="field">
+          <label for="negocio">Nombre de tu negocio</label>
+          <input type="text" id="negocio" name="negocio" required placeholder="Ej: Kiosco La Esquina">
+        </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp</label>
+          <input type="tel" id="whatsapp" name="whatsapp" required placeholder="Ej: 299 123 4567">
+        </div>
+        <div class="field">
+          <label for="mensaje">Contanos sobre tu negocio</label>
+          <textarea id="mensaje" name="mensaje" placeholder="¿A qué te dedicás y qué te gustaría lograr con tu web?"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Quiero mi presupuesto</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="logo logo--footer" style="margin-bottom:14px;" aria-label="Cinco Clics">
+          <svg viewBox="0 0 224 40" xmlns="http://www.w3.org/2000/svg" role="img">
+            <text x="0" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="currentColor">cinco</text>
+            <circle cx="46" cy="4.5" r="3" fill="var(--color-fresh)"/>
+            <text x="88" y="30" font-family="Poppins, sans-serif" font-weight="800" font-size="28" fill="var(--color-accent)">clics</text>
+            <g transform="translate(180,2)">
+              <path d="M2 3 L5 21 L8 15 L14 21 L16.5 18.5 L10.5 12.5 L17 9 Z" fill="var(--color-accent)"/>
+              <line x1="19" y1="1" x2="21.5" y2="-2.5" stroke="var(--color-energy)" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="23" y1="6" x2="27" y2="4.5" stroke="var(--color-fresh)" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="22.5" y1="11.5" x2="26.5" y2="12.5" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <p style="max-width:32ch; font-size:0.88rem;">Transformamos ideas en presencia digital: una página de ventas profesional en cinco clics.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#dolores">Por qué</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#precios">Precios</a></li>
+            <li><a href="#comunidad">Comunidad</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#">[email@placeholder.com]</a></li>
+            <li><a href="#">[WhatsApp placeholder]</a></li>
+            <li><a href="#">[Instagram placeholder]</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Cinco Clics. Todos los derechos reservados.</span>
+      <span class="proto-flag">Prototipo v0.1 — colores y logo pendientes de manual de marca</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menú mobile
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Typewriter en la barra de URL del hero
+  const urlSamples = ['tunegocio.com.ar', 'lagomeriasosa.com.ar', 'kioscolaesquina.com.ar', 'entrenamientocv.com.ar'];
+  const typedEl = document.getElementById('typedUrl');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (typedEl) {
+    if (reduceMotion) {
+      typedEl.textContent = urlSamples[0];
+    } else {
+      let sampleIndex = 0, charIndex = 0, deleting = false;
+      const tick = () => {
+        const current = urlSamples[sampleIndex];
+        if (!deleting) {
+          charIndex++;
+          typedEl.textContent = current.slice(0, charIndex);
+          if (charIndex === current.length) {
+            deleting = true;
+            setTimeout(tick, 1400);
+            return;
+          }
+        } else {
+          charIndex--;
+          typedEl.textContent = current.slice(0, charIndex);
+          if (charIndex === 0) {
+            deleting = false;
+            sampleIndex = (sampleIndex + 1) % urlSamples.length;
+          }
+        }
+        setTimeout(tick, deleting ? 35 : 70);
+      };
+      tick();
+    }
+  }
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Formulario (mock front-end — sin backend real)
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    success.classList.add('show');
+    form.reset();
+    success.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+  });
+</script>
+
+</body>
+</html>
